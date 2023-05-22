@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\server",
-    "\\server\\mongodb"
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\constants"
   ],
-  "SelectedNode": "\\server\\mongodb\\connect.js",
+  "SelectedNode": "\\client\\src\\App.jsx",
   "PreviewInSolutionExplorer": false
 }
