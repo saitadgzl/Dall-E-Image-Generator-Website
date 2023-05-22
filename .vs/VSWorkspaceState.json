@@ -2,11 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\client",
-    "\\client\\src",
-    "\\client\\src\\components",
-    "\\client\\src\\constants",
-    "\\server"
+    "\\server",
+    "\\server\\.env"
   ],
-  "SelectedNode": "\\client\\.gitignore",
+  "SelectedNode": "\\server\\.env",
   "PreviewInSolutionExplorer": false
 }
