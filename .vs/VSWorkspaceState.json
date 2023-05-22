@@ -4,8 +4,9 @@
     "\\client",
     "\\client\\src",
     "\\client\\src\\components",
-    "\\client\\src\\constants"
+    "\\client\\src\\constants",
+    "\\server"
   ],
-  "SelectedNode": "\\client\\src\\App.jsx",
+  "SelectedNode": "\\client\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
