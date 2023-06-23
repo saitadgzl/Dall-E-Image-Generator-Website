@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\client",
-    "\\server",
-    "\\server\\.env"
+    "\\client"
   ],
-  "SelectedNode": "\\server\\.env",
+  "SelectedNode": "\\client\\src",
   "PreviewInSolutionExplorer": false
 }

@@ -19,15 +19,72 @@ const Home = () => {
     const [allPosts, setAllPosts] = useState(null);
 
     const [searchText, setSearchText] = useState('');
+    const [searchTimeout, setSearchTimeout] = useState(null);
+    const [searchedResults, setSearchedResults] = useState(null);
+
+
+    const handleSearchChange = (e) => {
+        clearTimeout(searchTimeout);
+        setSearchText(e.target.value);
+
+        setSearchTimeout(
+            setTimeout(() => {
+                const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
+                setSearchedResults(searchResult);
+            }, 500),
+        );
+    };
+
+
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setLoading(true);
+
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/post', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    setAllPosts(result.data.reverse());
+                }
+            } catch (err) {
+                alert(err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchPosts();
+    }, []);
+
+
+
+
+
+ 
 
     return (
         <section className="max-w-7xl mx-auto">
             <div>
-                <h1 className="font-extrabold text-[#222328] text-[32px]">The Community Showcase</h1>
-                <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">>DALL-E AI tarafýndan oluþturulan görüntülere göz atýn.</p>
+                <h1 className="font-extrabold text-[#222328] text-[32px]">Topluluk Vitrini</h1>
+                <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">DALL-E tarafindan olusturulan essiz ve gorsel olarak carpici goruntulerden olusan bir koleksiyona goz atin.</p>
             </div>
+
             <div className="mt-16">
-                <FormField />
+                <FormField
+                    labelName="Gorsel Arayin"
+                    type="text"
+                    name="text"
+                    placeholder="Bir seyler arayin..."
+                    value={searchText}
+                    handleChange={handleSearchChange}
+                />
             </div>
 
             <div className="mt-10">
@@ -37,31 +94,30 @@ const Home = () => {
                     </div>
                 ) : (
                     <>
-                            {searchText && (
-                                <h2 className="font-medium text-[#666e75] text-xl mb-3">
-                                    Showing Resuls for <span className="text-[#222328]">{searchText}</span>:
-                                </h2>
+                        {searchText && (
+                            <h2 className="font-medium text-[#666e75] text-xl mb-3">
+                                Showing Resuls for <span className="text-[#222328]">{searchText}</span>:
+                            </h2>
+                        )}
+                        <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+                            {searchText ? (
+                                <RenderCards
+                                    data={searchedResults}
+                                    title="Aradiginiz sey henuz yok"
+                                />
+                            ) : (
+                                <RenderCards
+                                    data={allPosts}
+                                    title="Henuz gonderi yok"
+                                />
                             )}
-                            <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-                                {searchText ? (
-                                    <RenderCards
-                                        data={searchedResults}
-                                        title="No Search Results Found"
-                                    />
-                                ) : (
-                                    <RenderCards
-                                        data={allPosts}
-                                        title="No Posts Yet"
-                                    />
-                                )}
-                            </div>
+                        </div>
                     </>
-
                 )}
-             </div>
+            </div>
         </section>
-    )
-}
+    );
+};
 
 
-export default Home
+export default Home;
