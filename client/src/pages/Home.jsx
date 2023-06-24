@@ -76,7 +76,7 @@ const Home = () => {
                     labelName="Gorsel Arayin"
                     type="text"
                     name="text"
-                    placeholder="Bir seyler arayin..."
+                    placeholder="Aradiginiz seyi yazin..."
                     value={searchText}
                     handleChange={handleSearchChange}
                 />
