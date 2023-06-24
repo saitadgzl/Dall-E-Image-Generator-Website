@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
 const startServer = async () => {
     try {
         connectDB(process.env.MONGODB_URL);
-        app.listen(8080, () => console.log('Server http://localhost:8080/ de acildi.'));
+        app.listen(8080, () => console.log('Server localhost:8080 adresinde acildi.'));
     } catch (error) {
         console.log(error);
     }
